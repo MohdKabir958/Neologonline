@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { submitConnectionRequest } from "@/lib/api";
 import { whyNeologBenefits } from "@/data/features";
-import { plansData } from "@/data/plans";
+import { plans6M } from "@/data/plans";
 import { Suspense } from "react";
 
 function ConnectionFormInner() {
@@ -52,7 +52,7 @@ function ConnectionFormInner() {
   }
 
   return (
-    <div className="max-w-[1280px] mx-auto px-5 md:px-16 py-12">
+    <div className="max-w-[1280px] mx-auto px-5 md:px-16 pt-4 pb-12">
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Main Form */}
         <div className="flex-1 lg:max-w-2xl">
@@ -166,7 +166,7 @@ function ConnectionFormInner() {
                 <h3 className="font-heading text-lg font-bold text-[var(--text-primary)] mb-4">
                   Select Your Plan
                 </h3>
-                {plansData.map((plan) => (
+                {plans6M.map((plan) => (
                   <button
                     key={plan.id}
                     onClick={() =>
@@ -256,7 +256,7 @@ function ConnectionFormInner() {
                     {
                       label: "Plan",
                       value:
-                        plansData.find((p) => p.id === formData.selectedPlan)
+                        plans6M.find((p) => p.id === formData.selectedPlan)
                           ?.name || "Not selected",
                     },
                     { label: "Address", value: formData.address },
@@ -371,6 +371,12 @@ function ConnectionFormInner() {
 export default function NewConnectionPage() {
   return (
     <Suspense fallback={<div className="max-w-[1280px] mx-auto px-5 md:px-16 py-12">Loading...</div>}>
+      {/* Breadcrumbs */}
+      <div className="max-w-[1280px] mx-auto px-5 md:px-16 pt-4 pb-2 flex items-center gap-2 text-xs font-semibold text-[var(--text-muted)] select-none">
+        <Link href="/" className="hover:text-[var(--primary)] transition-colors">Home</Link>
+        <span className="material-symbols-outlined text-[14px] leading-none opacity-40">chevron_right</span>
+        <span className="text-[var(--text-primary)]">New Connection</span>
+      </div>
       <ConnectionFormInner />
     </Suspense>
   );

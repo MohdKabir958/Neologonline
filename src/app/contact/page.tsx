@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { submitContactForm } from "@/lib/api";
 import { COMPANY } from "@/lib/constants";
 
@@ -32,8 +33,15 @@ export default function ContactPage() {
 
   return (
     <>
+      {/* Breadcrumbs */}
+      <div className="max-w-[1280px] mx-auto px-5 md:px-16 pt-4 pb-2 flex items-center gap-2 text-xs font-semibold text-[var(--text-muted)] select-none">
+        <Link href="/" className="hover:text-[var(--primary)] transition-colors">Home</Link>
+        <span className="material-symbols-outlined text-[14px] leading-none opacity-40">chevron_right</span>
+        <span className="text-[var(--text-primary)]">Contact Us</span>
+      </div>
+
       {/* Hero */}
-      <section className="max-w-[1280px] mx-auto px-5 md:px-16 pt-16 pb-8">
+      <section className="max-w-[1280px] mx-auto px-5 md:px-16 pt-6 pb-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-8">
           <div className="lg:col-span-7">
             <h1 className="font-heading text-4xl md:text-[48px] font-bold text-[var(--text-primary)] mb-4">
@@ -265,9 +273,21 @@ export default function ContactPage() {
               )}
             </div>
 
-            {/* Map Placeholder */}
-            <div className="technical-border rounded-xl overflow-hidden bg-[var(--surface)] h-[250px] map-grid relative flex items-end justify-start p-6">
-              <div className="bg-[var(--surface)] technical-border rounded-lg px-4 py-3 flex items-center gap-3">
+            {/* Google Map Embed */}
+            <div className="technical-border rounded-xl overflow-hidden bg-[var(--surface)] h-[300px] relative pointer-events-auto">
+              <iframe
+                src="https://maps.google.com/maps?q=17.426008457974216,78.53420083680271&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="100%"
+                frameBorder="0"
+                style={{ border: 0 }}
+                allowFullScreen
+                aria-hidden="false"
+                tabIndex={0}
+                className="absolute inset-0"
+              ></iframe>
+              {/* Overlay Card */}
+              <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 z-10 pointer-events-none bg-[var(--surface)]/90 backdrop-blur-md technical-border rounded-lg px-4 py-3 flex items-center gap-3 shadow-[0_0_20px_rgba(0,0,0,0.5)]">
                 <span className="material-symbols-outlined text-[var(--primary)] text-[20px]">
                   location_on
                 </span>

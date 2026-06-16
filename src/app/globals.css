@@ -126,7 +126,8 @@
   --color-background: var(--background);
   --color-foreground: var(--on-surface);
   --font-sans: var(--font-inter);
-  --font-heading: var(--font-space-grotesk);
+  --font-heading: var(--font-plus-jakarta-sans);
+  --font-outfit: var(--font-outfit);
 }
 
 /* ─── Base Styles ──────────────────────────────────────── */
@@ -163,7 +164,11 @@ body {
 /* ─── Font utilities ───────────────────────────────────── */
 
 .font-heading {
-  font-family: var(--font-space-grotesk), "Space Grotesk", system-ui, sans-serif;
+  font-family: var(--font-plus-jakarta-sans), "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+.font-outfit {
+  font-family: var(--font-outfit), "Outfit", system-ui, sans-serif;
 }
 
 /* ─── Scrollbar (Dark theme) ───────────────────────────── */
@@ -264,4 +269,19 @@ body {
   background-size: 40px 40px;
 }
 
+/* ─── Marquee Animation ────────────────────────────────── */
 
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}

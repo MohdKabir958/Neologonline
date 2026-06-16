@@ -14,7 +14,7 @@ export default function DashboardLayout({
   const { user } = useUser();
 
   return (
-    <div className="max-w-[1280px] mx-auto px-5 md:px-16 py-8 flex flex-col lg:flex-row gap-6">
+    <div className="max-w-[1280px] mx-auto px-5 md:px-16 pt-4 pb-8 flex flex-col lg:flex-row gap-6">
       {/* Sidebar */}
       <aside className="lg:w-[240px] flex-shrink-0">
         {/* User Info */}

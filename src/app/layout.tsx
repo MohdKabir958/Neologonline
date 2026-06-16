@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans, Outfit } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "./globals.css";
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-plus-jakarta-sans",
+  display: "swap",
+});
 
 const inter = Inter({
   subsets: ["latin"],
@@ -12,9 +18,9 @@ const inter = Inter({
   display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
+const outfit = Outfit({
   subsets: ["latin"],
-  variable: "--font-space-grotesk",
+  variable: "--font-outfit",
   display: "swap",
 });
 
@@ -69,7 +75,7 @@ export default function RootLayout({
 }>) {
   return (
     <ConditionalClerkProvider>
-      <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
+      <html lang="en" className={`${inter.variable} ${plusJakartaSans.variable} ${outfit.variable}`}>
         <head>
           <link
             href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"

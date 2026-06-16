@@ -1,68 +1,56 @@
 import { Plan, PlanAddon } from "@/lib/types";
 
-export const plansData: Plan[] = [
+export const plans6M: Plan[] = [
   {
-    id: "starter",
-    name: "Starter",
+    id: "plan-40",
+    name: "40 Mbps",
     description: "Perfect for basic browsing and streaming.",
-    price: 499,
-    billingCycle: "monthly",
-    speed: 50,
+    price: 2799,
+    billingCycle: "6M",
+    speed: 40,
     speedUnit: "Mbps",
-    features: ["Unlimited Data", "Free Wi-Fi Router", "Premium Support"],
+    features: ["Unlimited Data", "Free Wi-Fi Router", "Standard Support"],
     ctaLabel: "Select Plan",
-    tier: "starter",
+    tier: "40mbps",
   },
   {
-    id: "home-pro",
-    name: "Home Pro",
-    description: "Optimized for high-definition streaming.",
-    price: 799,
-    billingCycle: "monthly",
-    speed: 100,
+    id: "plan-60",
+    name: "60 Mbps",
+    description: "Optimized for high-definition streaming & gaming.",
+    price: 3186,
+    billingCycle: "6M",
+    speed: 60,
     speedUnit: "Mbps",
     features: ["Unlimited Data", "Dual Band Router", "Priority Service"],
     isPopular: true,
     ctaLabel: "Select Plan",
-    tier: "home-pro",
+    tier: "60mbps",
   },
   {
-    id: "ultra",
-    name: "Ultra",
-    description: "Designed for heavy gamers & UHD.",
-    price: 1299,
-    billingCycle: "monthly",
-    speed: 200,
+    id: "plan-100",
+    name: "100 Mbps",
+    description: "Designed for heavy multi-device usage & UHD.",
+    price: 4248,
+    billingCycle: "6M",
+    speed: 100,
     speedUnit: "Mbps",
-    features: ["Unlimited Data", "Premium Mesh Option", "24/7 Dedicated Support"],
+    features: ["Unlimited Data", "Premium Router Option", "24/7 Dedicated Support"],
     ctaLabel: "Select Plan",
-    tier: "ultra",
-  },
-  {
-    id: "business",
-    name: "Business",
-    description: "For offices & enterprises.",
-    price: 2499,
-    billingCycle: "monthly",
-    speed: 500,
-    speedUnit: "Mbps",
-    features: ["Unlimited Data", "Static IP Included", "Enterprise SLA 99.9%"],
-    ctaLabel: "Select Plan",
-    tier: "business",
-  },
+    tier: "100mbps",
+  }
 ];
 
-export const quarterlyPlans: Plan[] = plansData.map((p) => ({
-  ...p,
-  billingCycle: "quarterly" as const,
-  price: Math.round(p.price * 0.94),
-}));
+export const plans12M: Plan[] = [
+  { ...plans6M[0], billingCycle: "12M", price: 4999 },
+  { ...plans6M[1], billingCycle: "12M", price: 5664 },
+  { ...plans6M[2], billingCycle: "12M", price: 8496 },
+];
 
-export const annualPlans: Plan[] = plansData.map((p) => ({
-  ...p,
-  billingCycle: "annual" as const,
-  price: Math.round(p.price * 0.7),
-}));
+export const plans18M: Plan[] = [
+  { ...plans6M[0], billingCycle: "18M", price: -1 }, // 40 Mbps has no 18M plan
+  { ...plans6M[1], billingCycle: "18M", price: 7434 },
+  { ...plans6M[2], billingCycle: "18M", price: 11682 },
+];
 
 export const planAddons: PlanAddon[] = [
   {
@@ -88,37 +76,32 @@ export const planAddons: PlanAddon[] = [
 export const planComparisonFeatures = [
   {
     feature: "Download Speed",
-    starter: "50 Mbps",
-    homePro: "100 Mbps",
-    ultra: "200 Mbps",
-    business: "500 Mbps",
+    plan40: "40 Mbps",
+    plan60: "60 Mbps",
+    plan100: "100 Mbps",
   },
   {
     feature: "Monthly Data",
-    starter: "Unlimited",
-    homePro: "Unlimited",
-    ultra: "Unlimited",
-    business: "Unlimited",
+    plan40: "Unlimited",
+    plan60: "Unlimited",
+    plan100: "Unlimited",
   },
   {
     feature: "Router Type",
-    starter: "Standard",
-    homePro: "Dual Band",
-    ultra: "Premium Dual Band",
-    business: "Gigabit Router",
+    plan40: "Standard",
+    plan60: "Dual Band",
+    plan100: "Premium Dual Band",
   },
   {
     feature: "Technical Support",
-    starter: "Standard",
-    homePro: "Priority",
-    ultra: "Premium",
-    business: "24/7 Enterprise",
+    plan40: "Standard",
+    plan60: "Priority",
+    plan100: "Premium",
   },
   {
     feature: "Static IP",
-    starter: "—",
-    homePro: "Add-on Available",
-    ultra: "Add-on Available",
-    business: "1 Free Included",
+    plan40: "—",
+    plan60: "Add-on Available",
+    plan100: "Add-on Available",
   },
 ];

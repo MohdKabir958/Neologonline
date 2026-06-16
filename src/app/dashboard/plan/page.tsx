@@ -4,9 +4,8 @@ import { useState } from "react";
 import { dashboardData } from "@/data/dashboard";
 
 const UPGRADE_OPTIONS = [
-  { id: "ultra", name: "Home Ultra", speed: "200 Mbps", price: 1249, features: ["Symmetrical Speed", "Dual-Band Wi-Fi 6", "Priority Routing", "Free installation"] },
-  { id: "giga", name: "Home Giga", speed: "500 Mbps", price: 2499, features: ["Gigabit Router included", "2 Static IPs optional", "Direct NOC routing", "99.9% SLA"] },
-  { id: "max", name: "Home Max", speed: "1 Gbps", price: 4999, features: ["1 Gbps Symmetrical", "4 Static IPs included", "Premium Fiber backbone", "Dedicated Support"] },
+  { id: "plan-60", name: "60 Mbps", speed: "60 Mbps", price: 3186, features: ["Symmetrical Speed", "Dual-Band Wi-Fi 5", "Priority Routing", "Free installation"] },
+  { id: "plan-100", name: "100 Mbps", speed: "100 Mbps", price: 4248, features: ["Wi-Fi 6 Mesh Router", "2 Static IPs optional", "Direct NOC routing", "99.9% SLA"] },
 ];
 
 export default function DashboardPlanPage() {
@@ -77,7 +76,7 @@ export default function DashboardPlanPage() {
                   {option.speed}
                 </p>
                 <p className="text-sm text-[var(--primary)] font-semibold mb-4">
-                  ₹{option.price} /mo
+                  ₹{option.price} /6mo
                 </p>
                 <ul className="space-y-2 mb-6">
                   {option.features.map((f, i) => (

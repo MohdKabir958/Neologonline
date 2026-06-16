@@ -38,6 +38,15 @@ export default async function BlogDetailPage({ params }: Props) {
 
   return (
     <>
+      {/* Breadcrumbs */}
+      <div className="max-w-[1280px] mx-auto px-5 md:px-16 pt-4 pb-2 flex items-center gap-2 text-xs font-semibold text-[var(--text-muted)] select-none">
+        <Link href="/" className="hover:text-[var(--primary)] transition-colors">Home</Link>
+        <span className="material-symbols-outlined text-[14px] leading-none opacity-40">chevron_right</span>
+        <Link href="/blog" className="hover:text-[var(--primary)] transition-colors">Blog</Link>
+        <span className="material-symbols-outlined text-[14px] leading-none opacity-40">chevron_right</span>
+        <span className="text-[var(--text-primary)] truncate max-w-[200px] sm:max-w-none">{post.title}</span>
+      </div>
+
       {/* JSON-LD */}
       <script
         type="application/ld+json"
@@ -53,8 +62,8 @@ export default async function BlogDetailPage({ params }: Props) {
         }}
       />
 
-      <article className="max-w-[1280px] mx-auto px-5 md:px-16 py-12">
-        <div className="max-w-3xl mx-auto">
+      <article className="max-w-[1280px] mx-auto px-5 md:px-16 pt-4 pb-12">
+        <div className="max-w-5xl mx-auto">
           {/* Header */}
           <div className="mb-8">
             <Link

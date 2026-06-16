@@ -34,7 +34,7 @@ export default function PlanCard({ plan, showSpeed = true }: PlanCardProps) {
         </p>
         <div className="flex items-baseline gap-1">
           <span
-            className={`font-heading text-4xl font-bold ${
+            className={`font-outfit text-4xl font-bold ${
               isPopular ? "text-[var(--primary)]" : "text-[var(--text-primary)]"
             }`}
           >
@@ -50,7 +50,7 @@ export default function PlanCard({ plan, showSpeed = true }: PlanCardProps) {
           <span className="material-symbols-outlined text-[var(--primary)] text-lg">
             speed
           </span>
-          <span className="font-heading text-xl font-bold text-[var(--text-primary)]">
+          <span className="font-outfit text-xl font-bold text-[var(--text-primary)]">
             {plan.speed} {plan.speedUnit}
           </span>
         </div>

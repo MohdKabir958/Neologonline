@@ -19,10 +19,10 @@ import {
 } from "./types";
 import { API_BASE_URL } from "./constants";
 import {
-  plansData,
+  plans6M,
+  plans12M,
+  plans18M,
   planAddons,
-  quarterlyPlans,
-  annualPlans,
 } from "@/data/plans";
 import { blogPosts } from "@/data/blog-posts";
 import { homeFaqs, plansFaqs, supportFaqs } from "@/data/faqs";
@@ -38,14 +38,14 @@ const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 /** Fetch all broadband plans */
 export async function fetchPlans(
-  billing: "monthly" | "quarterly" | "annual" = "monthly"
+  billing: "6M" | "12M" | "18M" = "6M"
 ): Promise<Plan[]> {
   // TODO: connect to backend API
   // const res = await fetch(`${API_BASE_URL}/plans?billing=${billing}`);
   await delay(400);
-  if (billing === "quarterly") return quarterlyPlans;
-  if (billing === "annual") return annualPlans;
-  return plansData;
+  if (billing === "12M") return plans12M;
+  if (billing === "18M") return plans18M;
+  return plans6M;
 }
 
 /** Fetch a single plan by ID */
@@ -53,7 +53,7 @@ export async function fetchPlanById(id: string): Promise<Plan | undefined> {
   // TODO: connect to backend API
   // const res = await fetch(`${API_BASE_URL}/plans/${id}`);
   await delay(200);
-  return plansData.find((p) => p.id === id);
+  return plans6M.find((p) => p.id === id);
 }
 
 /** Fetch plan add-ons */
@@ -142,22 +142,30 @@ export async function trackTicket(
 
 // ─── Coverage API ───────────────────────────────────────
 
-/** Check coverage availability by pincode or area name */
 export async function checkCoverage(
   query: string
 ): Promise<CoverageResult> {
   // TODO: connect to backend API
   // const res = await fetch(`${API_BASE_URL}/coverage/check?q=${query}`);
   await delay(1000);
-  const activePincodes = ["500081", "500003", "500034", "500008", "500016", "500033"];
-  const isAvailable = activePincodes.includes(query) || query.toLowerCase().includes("hitech");
+  
+  const normalizedQuery = query.trim().toLowerCase();
+  
+  // Active zones and their corresponding pincodes
+  const activeZones = ["hitec city", "hitech", "gachibowli", "kukatpally", "secunderabad", "tarnaka"];
+  const activePincodes = ["500081", "500032", "500072", "500003", "500017"];
+  
+  const isAvailable = 
+    activePincodes.includes(normalizedQuery) || 
+    activeZones.some(zone => normalizedQuery.includes(zone));
+
   return {
     available: isAvailable,
     area: query,
     message: isAvailable
-      ? "NeoLog fiber is available in your area! Get connected today."
-      : "We're expanding to your area soon. Register your interest to get notified.",
-    estimatedDate: isAvailable ? undefined : "Q1 2025",
+      ? `NeoLog high-speed fiber is active and available in ${query}! Get connected today.`
+      : `NeoLog fiber is not yet active in ${query}. We are expanding rapidly — register below to prioritize your area.`,
+    estimatedDate: isAvailable ? undefined : "Late 2026 / 2027",
   };
 }
 

@@ -2,9 +2,9 @@ import { DashboardData, Invoice } from "@/lib/types";
 
 export const dashboardData: DashboardData = {
   currentPlan: {
-    name: "Home Pro",
-    speed: "100",
-    description: "100Mbps Symmetrical",
+    name: "Starter",
+    speed: "40",
+    description: "40Mbps Unlimited",
   },
   dataUsage: {
     used: 312,
@@ -29,11 +29,11 @@ export const dashboardData: DashboardData = {
     { day: "Sun", usage: 38 },
   ],
   planDetails: {
-    name: "Home Pro",
-    series: "Home Pro Fiber Series",
-    speed: "100 Mbps (Up/Down)",
+    name: "Starter 40",
+    series: "Home Fiber Series",
+    speed: "40 Mbps (Up/Down)",
     fupLimit: "Unlimited Data",
-    router: "Dual-Band Wi-Fi 6",
+    router: "Standard Single-Band",
     staticIp: "Not Included",
   },
   contactDetails: {
@@ -45,7 +45,7 @@ export const dashboardData: DashboardData = {
 };
 
 export const invoicesData: Invoice[] = [
-  { id: "INV-2406", month: "June 2024", amount: 999.0, status: "PAID" },
-  { id: "INV-2405", month: "May 2024", amount: 999.0, status: "PAID" },
-  { id: "INV-2404", month: "April 2024", amount: 1249.0, status: "PAID" },
+  { id: "INV-2406", month: "June 2024", amount: 2799.0, status: "PAID" },
+  { id: "INV-2405", month: "May 2024", amount: 2799.0, status: "PAID" },
+  { id: "INV-2404", month: "April 2024", amount: 2799.0, status: "PAID" },
 ];

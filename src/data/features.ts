@@ -38,10 +38,10 @@ export const featuresData = [
 ];
 
 export const trustBarItems = [
-  "Licensed ISP",
-  "Fiber Backbone",
-  "No FUP Limits",
-  "Same-day Installation",
+  "100+ Active Circuits",
+  "15+ Institutions",
+  "3 Landmark Clients",
+  "5 Coverage Zones",
 ];
 
 export const whyNeologBenefits = [

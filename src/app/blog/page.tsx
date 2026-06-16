@@ -60,8 +60,15 @@ export default function BlogPage() {
 
   return (
     <>
+      {/* Breadcrumbs */}
+      <div className="max-w-[1280px] mx-auto px-5 md:px-16 pt-4 pb-2 flex items-center gap-2 text-xs font-semibold text-[var(--text-muted)] select-none">
+        <Link href="/" className="hover:text-[var(--primary)] transition-colors">Home</Link>
+        <span className="material-symbols-outlined text-[14px] leading-none opacity-40">chevron_right</span>
+        <span className="text-[var(--text-primary)]">Blog</span>
+      </div>
+
       {/* Featured Post */}
-      <section className="max-w-[1280px] mx-auto px-5 md:px-16 py-12">
+      <section className="max-w-[1280px] mx-auto px-5 md:px-16 pt-4 pb-8">
         {loading ? (
           <div className="h-[400px] animate-pulse bg-[var(--surface-variant)] rounded-xl" />
         ) : featured ? (

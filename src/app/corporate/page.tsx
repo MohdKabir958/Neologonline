@@ -12,6 +12,9 @@ import {
 } from "@/lib/api";
 import { CorporatePlan, LeaseLineFeature } from "@/lib/types";
 import { enterpriseFeatures, infrastructureFeatures } from "@/data/corporate";
+import NetworkIndicators from "@/components/NetworkIndicators";
+import ArchitectureStack from "@/components/ArchitectureStack";
+import CorporateClientsShowcase from "@/components/CorporateClientsShowcase";
 
 export default function CorporatePage() {
   const [billing, setBilling] = useState<"monthly" | "annual">("monthly");
@@ -64,10 +67,19 @@ export default function CorporatePage() {
 
   return (
     <>
+      {/* Breadcrumbs */}
+      <div className="bg-[var(--surface)]">
+        <div className="max-w-[1280px] mx-auto px-5 md:px-16 pt-4 pb-2 flex items-center gap-2 text-xs font-semibold text-[var(--text-muted)] select-none">
+          <Link href="/" className="hover:text-[var(--primary)] transition-colors">Home</Link>
+          <span className="material-symbols-outlined text-[14px] leading-none opacity-40">chevron_right</span>
+          <span className="text-[var(--text-primary)]">Corporate</span>
+        </div>
+      </div>
+
       {/* Hero */}
       <section className="bg-[var(--surface)] border-b border-[var(--border-cyan)] relative overflow-hidden">
         <div className="absolute inset-0 map-grid opacity-20"></div>
-        <div className="relative max-w-[1280px] mx-auto px-5 md:px-16 py-20">
+        <div className="relative max-w-[1280px] mx-auto px-5 md:px-16 pt-8 pb-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-7">
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-[var(--primary)]/10 technical-border rounded-full mb-6">
@@ -118,7 +130,7 @@ export default function CorporatePage() {
               { value: "< 1 ms", label: "Network Jitter" },
             ].map((s) => (
               <div key={s.label} className="text-center p-3 rounded-lg bg-[var(--surface-container-low)] technical-border">
-                <p className="font-heading text-lg md:text-xl font-bold text-[var(--primary)]">
+                <p className="font-outfit text-lg md:text-xl font-bold text-[var(--primary)]">
                   {s.value}
                 </p>
                 <p className="text-[10px] text-[var(--text-muted)] uppercase tracking-wider font-semibold mt-1">
@@ -130,7 +142,16 @@ export default function CorporatePage() {
         </div>
       </section>
 
-      {/* Enterprise Solutions Portfolio (5 offerings) */}
+      {/* ─── Corporate Clients Showcase ────────────────── */}
+      <CorporateClientsShowcase />
+
+      {/* ─── Network Indicators ────────────────────────── */}
+      <NetworkIndicators />
+
+      {/* ─── Architecture & Hardware Stack ─────────────── */}
+      <ArchitectureStack />
+
+      {/* ─── Enterprise Solutions Portfolio (5 offerings) */}
       <section className="max-w-[1280px] mx-auto px-5 md:px-16 py-20">
         <SectionHeader 
           title="Enterprise Solutions Portfolio" 
@@ -158,6 +179,78 @@ export default function CorporatePage() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+
+      {/* Educational Institutions Showcase */}
+      <section className="bg-[var(--surface)] py-20 border-b border-[var(--border-cyan)]/50">
+        <div className="max-w-[1280px] mx-auto px-5 md:px-16">
+          <SectionHeader 
+            title="Trusted by Hyderabad's Leading Institutions" 
+            subtitle="Powering critical infrastructure for education, government, and landmark organizations." 
+          />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Higher Education */}
+            <div>
+              <h3 className="text-sm font-bold uppercase tracking-widest text-[var(--primary)] mb-6 flex items-center gap-2">
+                <span className="material-symbols-outlined">school</span>
+                15+ Engineering Institutions
+              </h3>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                {[
+                  { name: "CVR College of Engineering", domain: "cvr.ac.in" },
+                  { name: "SNIST", domain: "sreenidhi.edu.in" },
+                  { name: "MLRIT", domain: "mlrinstitutions.ac.in" },
+                  { name: "GNITC", domain: "gniindia.org" },
+                  { name: "VBIT", domain: "vbit.ac.in" },
+                  { name: "ACE Engineering College", domain: "aceec.ac.in" },
+                  { name: "HITAM", domain: "hitam.org" },
+                  { name: "St. Peter's Engineering", domain: "spec.ac.in" },
+                  { name: "Stanley Engineering", domain: "stanley.edu.in" },
+                  { name: "Aurora's Engineering", domain: "aurora.edu.in" },
+                  { name: "Nalla Malla Reddy", domain: "nmrec.edu.in" },
+                  { name: "Nalla Narasimha Reddy", domain: "nnrg.edu.in" }
+                ].map((college) => (
+                  <div key={college.name} className="flex flex-col items-center justify-center p-4 bg-[var(--surface-container)] border border-[var(--border-cyan)]/30 rounded-xl hover:border-[var(--primary)]/50 transition-colors group text-center">
+                    <div className="w-12 h-12 rounded-full bg-white p-1.5 mb-3 flex items-center justify-center overflow-hidden shadow-lg group-hover:scale-110 transition-transform">
+                      <img 
+                        src={`https://www.google.com/s2/favicons?domain=${college.domain}&sz=128`} 
+                        alt={college.name} 
+                        className="w-full h-full object-contain"
+                        onError={(e) => { e.currentTarget.src = "https://ui-avatars.com/api/?name=" + encodeURIComponent(college.name) + "&background=0D1B2A&color=fff"; }}
+                      />
+                    </div>
+                    <span className="text-[10px] font-semibold text-[var(--text-primary)] leading-tight">
+                      {college.name}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* K-12 International Schools */}
+            <div>
+              <h3 className="text-sm font-bold uppercase tracking-widest text-[var(--primary)] mb-6 flex items-center gap-2">
+                <span className="material-symbols-outlined">menu_book</span>
+                K-12 International Schools
+              </h3>
+              <div className="flex flex-col gap-4">
+                <div className="p-5 bg-[var(--surface)] technical-border rounded-xl">
+                  <p className="font-bold text-[var(--text-primary)]">NIHOC</p>
+                  <p className="text-sm text-[var(--text-muted)]">The International School</p>
+                </div>
+                <div className="p-5 bg-[var(--surface)] technical-border rounded-xl">
+                  <p className="font-bold text-[var(--text-primary)]">Birla Open Minds</p>
+                  <p className="text-sm text-[var(--text-muted)]">International School, Bibinagar</p>
+                </div>
+                <div className="p-5 bg-[var(--surface)] technical-border rounded-xl">
+                  <p className="font-bold text-[var(--text-primary)]">Rockwoods</p>
+                  <p className="text-sm text-[var(--text-muted)]">Rockwoods International School</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -252,13 +345,13 @@ export default function CorporatePage() {
                   <p className="text-xs font-semibold uppercase tracking-[0.05em] text-[var(--text-muted)] mb-1">
                     {plan.name}
                   </p>
-                  <p className="font-heading text-2xl font-bold text-[var(--text-primary)] mb-1">
+                  <p className="font-outfit text-2xl font-bold text-[var(--text-primary)] mb-1">
                     {plan.speed}
                   </p>
                   <p className="text-sm text-[var(--text-muted)] mb-4">
                     {plan.tier === "custom"
                       ? "Custom Quote Required"
-                      : `₹${plan.price.toLocaleString("en-IN")} /mo`}
+                      : <span className="font-outfit">₹{plan.price.toLocaleString("en-IN")} /mo</span>}
                   </p>
                   <ul className="space-y-2 mb-6">
                     {plan.features.map((f, i) => (
@@ -308,6 +401,46 @@ export default function CorporatePage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* CDN & Upstream Partners Trust Badges */}
+      <section className="max-w-[1280px] mx-auto px-5 md:px-16 py-16">
+        <div className="mb-10 text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.05em] text-[var(--secondary)] mb-1">
+            Carrier-Grade Performance
+          </p>
+          <h2 className="font-heading text-2xl md:text-3xl font-bold text-[var(--text-primary)]">
+            CDN Peering & Transit Partners
+          </h2>
+          <p className="text-sm text-[var(--text-muted)] mt-1 max-w-xl mx-auto leading-relaxed">
+            High-speed routing paths and direct edge nodes reduce latency. Combined capacity of 30 Gbps CDN caching.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
+          {[
+            { name: "Google GGC Cache", speed: "10 Gbps", desc: "Direct Caching Edge" },
+            { name: "Facebook CDN", speed: "10 Gbps", desc: "Direct Peer Delivery" },
+            { name: "Akamai CDN", speed: "10 Gbps", desc: "Global Edge Node" },
+            { name: "NIXI Peering", speed: "Ultra-Low Latency", desc: "Local Exchange Routing" },
+            { name: "Airtel & Tata Upstreams", speed: "Multi-Carrier", desc: "Redundant Fiber Transit" }
+          ].map((partner, i) => (
+            <div key={partner.name} className="p-5 bg-[var(--surface)] border border-[var(--border-cyan)] rounded-xl text-center active-glow transition-all">
+              <span className="material-symbols-outlined text-[var(--primary)] text-[28px] mb-3 block select-none">
+                {i < 3 ? "dns" : i === 3 ? "hub" : "settings_ethernet"}
+              </span>
+              <h4 className="font-heading text-sm font-bold text-[var(--text-primary)] mb-1">
+                {partner.name}
+              </h4>
+              <p className="font-outfit text-xs font-black text-[var(--primary)] mb-0.5">
+                {partner.speed}
+              </p>
+              <p className="text-[10px] text-[var(--text-muted)] mt-0.5">
+                {partner.desc}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 

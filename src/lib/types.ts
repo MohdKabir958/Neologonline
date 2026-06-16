@@ -4,13 +4,13 @@ export interface Plan {
   name: string;
   description: string;
   price: number;
-  billingCycle: "monthly" | "quarterly" | "annual";
+  billingCycle: "monthly" | "quarterly" | "annual" | "6M" | "12M" | "18M";
   speed: number;
   speedUnit: string;
   features: string[];
   isPopular?: boolean;
   ctaLabel: string;
-  tier: "starter" | "home-pro" | "ultra" | "business";
+  tier: "starter" | "home-pro" | "ultra" | "business" | "40mbps" | "60mbps" | "100mbps";
 }
 
 export interface PlanAddon {

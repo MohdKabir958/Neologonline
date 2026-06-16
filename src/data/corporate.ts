@@ -4,7 +4,7 @@ export const corporatePlans: CorporatePlan[] = [
   {
     id: "corp-starter",
     name: "ILL Starter",
-    speed: "50 Mbps",
+    speed: "40 Mbps",
     price: 9999,
     billingCycle: "monthly",
     features: ["Symmetrical Bandwidth", "Pool of Static IPs", "99.99% SLA Guarantee"],
@@ -14,8 +14,8 @@ export const corporatePlans: CorporatePlan[] = [
   {
     id: "corp-growth",
     name: "Business Growth",
-    speed: "100 Mbps",
-    price: 19999,
+    speed: "60 Mbps",
+    price: 14999,
     billingCycle: "monthly",
     features: ["1:1 Dedicated link", "BGP Routing Support", "4hr MTTR SLA commitment"],
     ctaLabel: "Select Plan",
@@ -24,8 +24,8 @@ export const corporatePlans: CorporatePlan[] = [
   {
     id: "corp-power",
     name: "Enterprise Power",
-    speed: "500 Mbps",
-    price: 49999,
+    speed: "100 Mbps",
+    price: 19999,
     billingCycle: "monthly",
     features: ["Dual path protection", "Direct peering circuits", "24/7 dedicated support"],
     isPopular: true,

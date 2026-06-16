@@ -1,52 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import SectionHeader from "@/components/ui/SectionHeader";
-import PlanCard from "@/components/ui/PlanCard";
-import { CardSkeleton } from "@/components/ui/Skeleton";
-import ErrorState from "@/components/ui/ErrorState";
-import { fetchPlans } from "@/lib/api";
-import { Plan } from "@/lib/types";
+import HeroCarousel from "@/components/HeroCarousel";
+import PlanFinder from "@/components/PlanFinder";
+import CorporateTeaser from "@/components/CorporateTeaser";
 import { featuresData, trustBarItems } from "@/data/features";
-import { COMPANY } from "@/lib/constants";
+import NetworkIndicators from "@/components/NetworkIndicators";
 
 export default function HomePage() {
-  const [plans, setPlans] = useState<Plan[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const [speed, setSpeed] = useState(0);
-
-  useEffect(() => {
-    loadPlans();
-    // Speed counter animation
-    let start = 0;
-    const end = 200;
-    const duration = 2000;
-    const startTime = Date.now();
-    const timer = setInterval(() => {
-      const elapsed = Date.now() - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      start = Math.floor(progress * end);
-      setSpeed(start);
-      if (progress >= 1) clearInterval(timer);
-    }, 16);
-    return () => clearInterval(timer);
-  }, []);
-
-  async function loadPlans() {
-    try {
-      setLoading(true);
-      setError(false);
-      const data = await fetchPlans();
-      setPlans(data.slice(0, 3)); // Show first 3 on home
-    } catch {
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
-  }
-
+  const [activeRingTab, setActiveRingTab] = useState<1 | 2>(1);
   return (
     <>
       {/* JSON-LD */}
@@ -75,87 +38,7 @@ export default function HomePage() {
       />
 
       {/* ─── Hero Section ──────────────────────────────── */}
-      <section className="max-w-[1280px] mx-auto px-5 md:px-16 py-8 flex flex-col lg:flex-row items-center gap-6 overflow-hidden">
-        {/* Left Content */}
-        <div className="flex-1 space-y-4 z-10 py-8 lg:py-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-[var(--primary)]/10 technical-border rounded-full">
-            <span className="material-symbols-outlined text-[16px] text-[var(--primary)]">
-              location_on
-            </span>
-            <span className="text-[var(--primary)] text-xs font-semibold tracking-[0.05em] uppercase">
-              Hyderabad&apos;s fiber broadband
-            </span>
-          </div>
-          <h1 className="font-heading text-4xl lg:text-[48px] font-bold leading-tight text-[var(--text-primary)]">
-            Internet that{" "}
-            <span className="text-[var(--primary)]">never slows</span> you down
-          </h1>
-          <p className="text-lg leading-7 text-[var(--text-muted)] max-w-xl">
-            Experience ultra-stable fiber connectivity powered by a dedicated
-            backbone. Designed for professional gamers, creators, and modern
-            smart homes in Hyderabad.
-          </p>
-          <div className="flex flex-wrap gap-4 pt-4">
-            <Link
-              href="/plans"
-              className="bg-[var(--secondary)] text-[var(--on-secondary)] px-8 py-4 rounded-xl text-sm font-bold flex items-center gap-2 hover:brightness-110 transition-all"
-            >
-              View Plans
-              <span className="material-symbols-outlined">arrow_forward</span>
-            </Link>
-            <a
-              href={`tel:${COMPANY.phone.replace(/\s/g, "")}`}
-              className="technical-border text-[var(--text-primary)] px-8 py-4 rounded-xl text-sm font-bold hover:bg-[var(--surface)] transition-all"
-            >
-              Call Us: {COMPANY.phone}
-            </a>
-          </div>
-        </div>
-
-        {/* Right: Speed Showcase */}
-        <div className="flex-1 w-full lg:w-auto z-10 flex flex-col gap-4">
-          <div className="bg-[var(--surface)] technical-border p-8 rounded-xl active-glow">
-            <p className="text-xs font-semibold tracking-[0.05em] text-[var(--text-muted)] uppercase mb-4">
-              Your connection could be
-            </p>
-            <div className="flex items-baseline gap-2 mb-2">
-              <span className="font-heading text-[48px] font-bold text-[var(--primary)]">
-                {speed}
-              </span>
-              <span className="font-heading text-2xl font-bold text-[var(--text-muted)]">
-                Mbps
-              </span>
-            </div>
-            <div className="w-full h-2 bg-[var(--surface-container)] rounded-full overflow-hidden mb-8">
-              <div className="h-full bg-[var(--primary)] animate-progress" />
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              {[
-                { label: "Reliability", value: "99.9%" },
-                { label: "Support", value: "24/7" },
-                { label: "Hardware", value: "Free", italic: true },
-                { label: "Active Users", value: "5,000+" },
-              ].map((stat) => (
-                <div
-                  key={stat.label}
-                  className="p-4 bg-[var(--background)]/50 technical-border rounded-lg"
-                >
-                  <p className="text-xs font-semibold tracking-[0.05em] text-[var(--text-muted)] uppercase mb-1">
-                    {stat.label}
-                  </p>
-                  <span
-                    className={`font-heading text-2xl font-bold text-[var(--text-primary)] ${
-                      stat.italic ? "italic" : ""
-                    }`}
-                  >
-                    {stat.value}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroCarousel />
 
       {/* ─── Trust Bar ─────────────────────────────────── */}
       <section className="bg-[var(--surface-container)] py-8 border-y border-[var(--border-cyan)]">
@@ -171,28 +54,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── Plans Teaser ──────────────────────────────── */}
-      <section className="max-w-[1280px] mx-auto px-5 md:px-16 py-24">
-        <SectionHeader
-          title="Choose Your Speed"
-          subtitle="Flexible plans designed for everything from casual browsing to high-stakes professional streaming."
-        />
-        {error ? (
-          <ErrorState onRetry={loadPlans} />
-        ) : loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[1, 2, 3].map((i) => (
-              <CardSkeleton key={i} />
-            ))}
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {plans.map((plan) => (
-              <PlanCard key={plan.id} plan={plan} showSpeed={false} />
-            ))}
-          </div>
-        )}
-      </section>
+      {/* ─── Plan Finder Section ────────────────────────── */}
+      <PlanFinder />
+
+      {/* ─── Network Indicators ────────────────────────── */}
+      <NetworkIndicators />
+
+      {/* ─── Corporate Teaser Section ───────────────────── */}
+      <CorporateTeaser />
 
       {/* ─── Features Grid ─────────────────────────────── */}
       <section className="bg-[var(--surface-container-low)] py-24">
@@ -218,6 +87,186 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ─── Coverage Area Teaser ────────────────────────── */}
+      <section className="bg-[var(--surface-container-low)] border-t border-b border-[var(--border-cyan)] py-20 w-full relative overflow-hidden">
+        {/* Background Cover Image of Fiber Optics */}
+        <div className="absolute inset-0 z-0 opacity-35 select-none pointer-events-none">
+          <img
+            src="/images/fiber-optics-bg.png"
+            alt=""
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[var(--surface-container-low)] via-transparent to-[var(--surface-container-low)]" />
+        </div>
+
+        {/* Subtle background glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[var(--primary)]/5 blur-[120px] rounded-full pointer-events-none z-0" />
+
+        <div className="max-w-[1280px] mx-auto px-5 md:px-16 text-center relative z-10">
+          <p className="text-xs font-semibold uppercase tracking-[0.05em] text-[var(--primary)] mb-1">
+            Now Serving Twin Cities
+          </p>
+          <h2 className="font-heading text-3xl font-bold text-[var(--text-primary)] mb-4">
+            Expanding High-Speed Fiber Coverage
+          </h2>
+          <p className="text-sm text-[var(--text-muted)] max-w-xl mx-auto mb-10 leading-relaxed">
+            Neolog fiber rings are actively providing dedicated gigabit connections to Hyderabad&apos;s key commercial and residential hubs.
+          </p>
+
+          {/* Ring Selector Tabs */}
+          <div className="flex justify-center mb-8">
+            <div className="inline-flex items-center gap-1 bg-[var(--surface)] p-1 rounded-xl border border-[var(--border-cyan)]">
+              <button
+                onClick={() => setActiveRingTab(1)}
+                className={`px-5 py-2.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                  activeRingTab === 1
+                    ? "bg-[var(--primary)] text-[var(--on-primary)] active-glow"
+                    : "text-[var(--text-muted)] hover:text-white"
+                }`}
+              >
+                Metro Ring 1 (40G Primary)
+              </button>
+              <button
+                onClick={() => setActiveRingTab(2)}
+                className={`px-5 py-2.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                  activeRingTab === 2
+                    ? "bg-[var(--secondary)] text-[var(--on-secondary)]"
+                    : "text-[var(--text-muted)] hover:text-white"
+                }`}
+              >
+                Metro Ring 2 (40G High-Capacity)
+              </button>
+            </div>
+          </div>
+
+          {/* Animated Route Flow Trail */}
+          <div className="flex flex-wrap justify-center items-center gap-2 max-w-[1000px] mx-auto bg-[var(--surface)] p-6 rounded-2xl border border-[var(--border-cyan)] mb-10 overflow-x-auto select-none">
+            {(activeRingTab === 1
+              ? ["Tarnaka", "Boduppal", "Narapally", "Ghatkesar", "Dammaiguda", "AS Rao Nagar", "Tarnaka"]
+              : ["Nagole", "Ameerpet", "Kukatpally", "Nampally", "Falaknuma", "Santhosh Nagar", "Saidabad", "Nagole"]
+            ).map((node, idx, arr) => (
+              <div key={`${node}-${idx}`} className="flex items-center gap-2">
+                <div className={`px-4 py-2 border rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
+                  ["Tarnaka", "Secunderabad", "HITEC City", "Gachibowli", "Kukatpally"].includes(node)
+                    ? "bg-[var(--primary)]/10 border-[var(--primary)] text-[var(--primary)] active-glow"
+                    : "bg-[var(--surface-container)] border-[var(--border-cyan)] text-[var(--text-primary)]"
+                }`}>
+                  {node}
+                </div>
+                {idx < arr.length - 1 && (
+                  <span className={`material-symbols-outlined text-[16px] animate-pulse ${
+                    activeRingTab === 1 ? "text-[var(--primary)]" : "text-[var(--secondary)]"
+                  }`}>
+                    arrow_forward
+                  </span>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Active Zones Cards for the Selected Ring */}
+          <p className="text-xs font-semibold uppercase tracking-[0.05em] text-[var(--text-muted)] mb-4">
+            Active Hubs on this Ring
+          </p>
+          <div className="flex flex-wrap justify-center gap-4 max-w-[800px] mx-auto mb-10">
+            {(activeRingTab === 1
+              ? [
+                  { name: "Tarnaka", spec: "Corporate HQ", ring: "Ring 1" },
+                  { name: "Secunderabad", spec: "North Ring Hub", ring: "Ring 1" },
+                ]
+              : [
+                  { name: "HITEC City", spec: "10G CDN Edge", ring: "Ring 2" },
+                  { name: "Gachibowli", spec: "Enterprise Core", ring: "Ring 2" },
+                  { name: "Kukatpally", spec: "Metro Transit", ring: "Ring 2" },
+                ]
+            ).map((zone) => (
+              <div 
+                key={zone.name} 
+                className="w-[180px] p-5 bg-[var(--surface)] border border-[var(--border-cyan)] hover:border-[var(--primary)] rounded-2xl transition-all duration-300 text-center active-glow group"
+              >
+                <span className="material-symbols-outlined text-[var(--primary)] text-[24px] mb-2 block group-hover:scale-110 transition-transform">
+                  location_on
+                </span>
+                <h4 className="font-heading text-sm font-bold text-[var(--text-primary)]">
+                  {zone.name}
+                </h4>
+                <p className="text-[10px] text-[var(--text-muted)] mt-1">
+                  {zone.spec}
+                </p>
+                <span className="inline-block mt-3 px-2 py-0.5 rounded-full bg-[var(--surface-container-high)] text-[8px] font-semibold text-[var(--primary)] uppercase tracking-wider">
+                  {zone.ring}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* Gold CTA button to /coverage */}
+          <div className="mt-8 flex justify-center">
+            <Link
+              href="/coverage"
+              className="px-8 py-4 bg-[var(--secondary)] text-[var(--on-secondary)] font-bold rounded-xl text-sm uppercase hover:brightness-110 transition-all cursor-pointer inline-flex items-center gap-2 active-glow shadow-md tracking-wider"
+            >
+              <span>Explore Interactive Coverage Map</span>
+              <span className="material-symbols-outlined text-[18px]">map</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── College Clients Logo Wall ────────────────────────── */}
+      <section className="bg-[var(--surface-container)] py-16 overflow-hidden border-y border-[var(--border-cyan)]">
+        <div className="max-w-[1280px] mx-auto px-5 md:px-16 text-center mb-10">
+          <p className="text-sm font-bold uppercase tracking-widest text-[var(--text-muted)]">
+            Trusted by 15+ Engineering Institutions in Hyderabad
+          </p>
+        </div>
+        <div className="relative flex overflow-x-hidden">
+          {/* Subtle gradient masks for smooth fade at edges */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-1/6 bg-gradient-to-r from-[var(--surface-container)] to-transparent z-10"></div>
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-1/6 bg-gradient-to-l from-[var(--surface-container)] to-transparent z-10"></div>
+
+          <div 
+            className="flex w-max flex-nowrap py-4 hover:[animation-play-state:paused]"
+            style={{ animation: 'marquee 40s linear infinite' }}
+          >
+            {[...Array(2)].map((_, i) => (
+              <div key={i} className="flex flex-nowrap shrink-0 gap-6 pr-6 items-center">
+                {[
+                  "CVR College of Engineering",
+                  "SNIST",
+                  "MLRIT",
+                  "GNITC",
+                  "VBIT",
+                  "ACE Engineering College",
+                  "HITAM",
+                  "St. Peter's Engineering College",
+                  "Stanley Engineering College",
+                  "Aurora's Engineering College",
+                  "Nalla Malla Reddy",
+                  "Nalla Narasimha Reddy"
+                ].map((college, idx) => (
+                  <div
+                    key={`${college}-${i}-${idx}`}
+                    className="flex items-center gap-3 px-6 py-4 bg-[var(--surface)] border border-[var(--border-cyan)]/50 rounded-xl whitespace-nowrap opacity-80 hover:opacity-100 transition-opacity cursor-default"
+                  >
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${
+                      idx % 3 === 0 ? 'bg-[var(--primary)]/20 text-[var(--primary)]' : 
+                      idx % 3 === 1 ? 'bg-[var(--secondary)]/20 text-[var(--secondary)]' : 
+                      'bg-[var(--surface-bright)] text-[var(--text-primary)]'
+                    }`}>
+                      <span className="material-symbols-outlined text-[16px]">
+                        {idx % 2 === 0 ? "account_balance" : "school"}
+                      </span>
+                    </div>
+                    <span className="text-sm font-bold text-[var(--text-primary)]">{college}</span>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ─── About Teaser ──────────────────────────────── */}
       <section className="max-w-[1280px] mx-auto px-5 md:px-16 py-24 flex flex-col lg:flex-row items-center gap-16">
         <div className="flex-1 space-y-6">
@@ -234,7 +283,7 @@ export default function HomePage() {
           </p>
           <div className="flex gap-12 border-t border-[var(--border-cyan)] pt-12">
             <div>
-              <p className="font-heading text-[48px] font-bold text-[var(--primary)] mb-1">
+              <p className="font-outfit text-[48px] font-bold text-[var(--primary)] mb-1">
                 5K+
               </p>
               <p className="text-sm font-medium text-[var(--text-muted)] uppercase tracking-wider">
@@ -242,7 +291,7 @@ export default function HomePage() {
               </p>
             </div>
             <div>
-              <p className="font-heading text-[48px] font-bold text-[var(--primary)] mb-1">
+              <p className="font-outfit text-[48px] font-bold text-[var(--primary)] mb-1">
                 99%
               </p>
               <p className="text-sm font-medium text-[var(--text-muted)] uppercase tracking-wider">
