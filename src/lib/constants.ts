@@ -35,13 +35,25 @@ export const COMPANY = {
   },
 } as const;
 
-// Navigation links
+// Navigation links (main bar)
 export const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "Plans", href: "/plans" },
+  { label: "Corporate", href: "/corporate" },
+  { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ] as const;
+
+// Extra navigation links (shown in "More" dropdown & mobile menu)
+export const EXTRA_NAV_LINKS = [
+  { label: "New Connection", href: "/new-connection", icon: "add_circle" },
+  { label: "Support", href: "/support", icon: "support_agent" },
+  { label: "Coverage", href: "/coverage", icon: "map" },
+] as const;
+
+// App Download
+export const APP_DOWNLOAD_URL = "#"; // Replace with actual app store link
 
 // Footer links
 export const FOOTER_LINKS = [
@@ -49,6 +61,14 @@ export const FOOTER_LINKS = [
   { label: "Terms", href: "/terms" },
   { label: "Refund", href: "/refund" },
   { label: "Cyber Crime Awareness", href: "/cyber-crime-awareness" },
+] as const;
+
+export const FOOTER_NAV_LINKS = [
+  { label: "Support Center", href: "/support" },
+  { label: "Coverage Area", href: "/coverage" },
+  { label: "Corporate Plans", href: "/corporate" },
+  { label: "Blog", href: "/blog" },
+  { label: "New Connection", href: "/new-connection" },
 ] as const;
 
 // Dashboard sidebar links

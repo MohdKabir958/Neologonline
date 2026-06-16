@@ -3,118 +3,117 @@ import { CorporatePlan, LeaseLineFeature } from "@/lib/types";
 export const corporatePlans: CorporatePlan[] = [
   {
     id: "corp-starter",
-    name: "Starter",
-    speed: "10 Mbps",
-    price: 4999,
+    name: "ILL Starter",
+    speed: "50 Mbps",
+    price: 9999,
     billingCycle: "monthly",
-    features: ["1:1 Dedicated", "3 Static IPs", "99.5% Uptime"],
-    ctaLabel: "Select Plan",
+    features: ["Symmetrical Bandwidth", "Pool of Static IPs", "99.99% SLA Guarantee"],
+    ctaLabel: "Get Started",
     tier: "starter",
   },
   {
     id: "corp-growth",
-    name: "Growth",
-    speed: "50 Mbps",
-    price: 14999,
+    name: "Business Growth",
+    speed: "100 Mbps",
+    price: 19999,
     billingCycle: "monthly",
-    features: ["Managed Router", "4 Static IPs", "4hr Fault Resolution"],
+    features: ["1:1 Dedicated link", "BGP Routing Support", "4hr MTTR SLA commitment"],
     ctaLabel: "Select Plan",
     tier: "growth",
   },
   {
     id: "corp-power",
-    name: "Power",
-    speed: "100 Mbps",
-    price: 24999,
+    name: "Enterprise Power",
+    speed: "500 Mbps",
+    price: 49999,
     billingCycle: "monthly",
-    features: ["Priority Routing", "8 Static IPs", "Proactive Monitoring"],
+    features: ["Dual path protection", "Direct peering circuits", "24/7 dedicated support"],
     isPopular: true,
     ctaLabel: "Select Plan",
     tier: "power",
   },
   {
     id: "corp-custom",
-    name: "Custom",
+    name: "Custom Infrastructure",
     speed: "1 Gbps +",
     price: 0,
     billingCycle: "monthly",
-    features: ["Dual-Path Fiber", "Custom Hardware Specs", "24/7 Dedicated Team"],
-    ctaLabel: "Contact Sales",
+    features: ["Bespoke optical route", "Tailored SLA commitments", "Hybrid cloud links"],
+    ctaLabel: "Request Feasibility",
     tier: "custom",
   },
 ];
 
 export const leaseLineFeatures: LeaseLineFeature[] = [
   {
-    feature: "Contention Ratio",
-    standardBroadband: "Shared (up to 1:50)",
-    neologLeasedLine: "Dedicated 1(Strict 1:1)",
+    feature: "NOC Support Desk",
+    standardBroadband: "Centralized support team / Call centers",
+    neologLeasedLine: "Local Hyderabad NOC (Direct engineer support)",
   },
   {
-    feature: "Bandwidth Delivery",
-    standardBroadband: '"Up to" Asymmetric speeds',
-    neologLeasedLine: "Guaranteed Symmetric Pipe",
+    feature: "Provisioning speed",
+    standardBroadband: "Long provisioning cycles (15-30 days)",
+    neologLeasedLine: "Faster deployment (within 72-96 hours)",
   },
   {
-    feature: "IP Allocation",
-    standardBroadband: "Dynamic / Single Static",
-    neologLeasedLine: "Pool of Static IPs Included",
+    feature: "Service Contracts",
+    standardBroadband: "Rigid SLAs (Best effort uptime)",
+    neologLeasedLine: "Custom enterprise SLAs (99.99% guaranteed)",
   },
   {
-    feature: "Hardware",
-    standardBroadband: "Standard Router",
-    neologLeasedLine: "Enterprise Managed Cisco/Juniper",
+    feature: "Routing Policy",
+    standardBroadband: "Standard static routing paths",
+    neologLeasedLine: "Custom traffic engineering / BGP peer paths",
   },
   {
-    feature: "Support Ticket Priority",
-    standardBroadband: "Best Effort (24-48 hours)",
-    neologLeasedLine: "Premium (Immediate Response)",
+    feature: "Hardware Architecture",
+    standardBroadband: "Limited flexibility / Locked CPE devices",
+    neologLeasedLine: "Tailored network architecture & routing gear",
   },
 ];
 
 export const enterpriseFeatures = [
   {
-    icon: "swap_horiz",
-    title: "1:1 Symmetric Bandwidth",
-    description:
-      "Experience identical upload and download speeds, essential for seamless cloud operations, large-scale backups, and high-definition video conferencing.",
+    icon: "settings_input_hdmi",
+    title: "Dedicated ILL",
+    description: "Symmetrical bandwidth, Static IP allocation, native BGP routing support, and custom legally-backed uptime SLAs.",
   },
   {
-    icon: "verified",
-    title: "Strict Service Level Agreement",
-    description:
-      "A legally binding SLA ensures 99.9% availability with a proactive 4-hour fault resolution window, keeping your business operational around the clock.",
-    isHighlighted: true,
+    icon: "hub",
+    title: "Corporate Campus",
+    description: "Multi-site L2/L3 private networks, SD-WAN compatibility, physical fiber redundancy, and strict VLAN traffic segmentation.",
   },
   {
-    icon: "headset_mic",
-    title: "24/7 Priority NOC Support",
-    description:
-      "Skip the queue with a dedicated bypass to our Network Operations Center. Technical experts are available instantly for any enterprise-grade concern.",
+    icon: "dns",
+    title: "Data Center & DR",
+    description: "Low-latency datacenter cross-connects, high-throughput pipelines, path protection, and seamless Disaster Recovery links.",
+  },
+  {
+    icon: "school",
+    title: "Institutional Infrastructure",
+    description: "Secure campus segmentation, Google/FB CDN-optimized media streaming, firewall rules, and QoS bandwidth prioritization.",
+  },
+  {
+    icon: "storefront",
+    title: "Bulk & Wholesale Transit",
+    description: "Tailored transit feeds for local operators, upcountry franchisee partners, bandwidth scaling, and revenue-share billing.",
   },
 ];
 
 export const infrastructureFeatures = [
   {
-    icon: "monitoring",
-    title: "Proactive 24/7 Monitoring",
-    description:
-      "We see problems before you do. Our automated systems alert our NOC the millisecond a deviation in performance is detected.",
+    icon: "bolt",
+    title: "Agility",
+    description: "Rapid response times to deploy, scale, or modify your company's network routes as your operational needs evolve.",
   },
   {
-    icon: "security",
-    title: "Dual-Path Fiber Redundancy",
-    description:
-      "Our infrastructure uses physically diverse paths, ensuring that a single cable cut doesn't take your business offline. True carrier-grade resilience.",
+    icon: "location_city",
+    title: "Local Presence",
+    description: "A fully equipped Hyderabad NOC staffed with real network engineers rather than distant centralized call centers.",
   },
   {
-    icon: "person",
-    title: "Relationship Manager",
-    description: "A single point of contact for all your business needs.",
-  },
-  {
-    icon: "receipt",
-    title: "1:1 Dedicated Rate",
-    description: "No sharing. No slowdowns. Your pipe is yours alone.",
+    icon: "center_focus_strong",
+    title: "Enterprise Focus",
+    description: "We focus exclusively on mission-critical business connectivity, keeping your enterprise online under all grid circumstances.",
   },
 ];
