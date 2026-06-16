@@ -51,20 +51,15 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.neologonline.in"),
 };
 
-// Check if Clerk keys are configured (not placeholder)
-const clerkKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || "";
-const isClerkConfigured =
-  clerkKey.length > 0 && !clerkKey.includes("PLACEHOLDER");
+// Ensure a publishable key is always present during build/render to prevent Clerk hook crashes
+const clerkKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || "pk_test_PLACEHOLDER";
 
 function ConditionalClerkProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  if (isClerkConfigured) {
-    return <ClerkProvider>{children}</ClerkProvider>;
-  }
-  return <>{children}</>;
+  return <ClerkProvider publishableKey={clerkKey}>{children}</ClerkProvider>;
 }
 
 export default function RootLayout({
