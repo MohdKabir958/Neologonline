@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { COMPANY, FOOTER_LINKS, FOOTER_NAV_LINKS } from "@/lib/constants";
 
 export default function Footer() {
@@ -11,9 +12,11 @@ export default function Footer() {
           {/* Column 1: Brand Identity & Regulatory Compliance */}
           <div className="space-y-6">
             <Link href="/" className="inline-block transition-transform hover:scale-[1.02]">
-              <img
+              <Image
                 src="/LOGO-1-removebg-preview.png"
                 alt="NeoLog Broadband Logo"
+                width={200}
+                height={80}
                 className="h-14 md:h-16 w-auto object-contain"
               />
             </Link>

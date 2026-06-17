@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { BlogCardSkeleton } from "@/components/ui/Skeleton";
 import ErrorState from "@/components/ui/ErrorState";
@@ -74,10 +75,13 @@ export default function BlogPage() {
         ) : featured ? (
           <div className="flex flex-col lg:flex-row gap-8 p-6 technical-border rounded-xl bg-[var(--surface)] group">
             <div className="flex-1 aspect-video bg-[var(--surface-container)] rounded-xl overflow-hidden relative">
-              <img
+              <Image
                 src={featured.image}
                 alt={featured.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                priority
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
             </div>
             <div className="flex-1 flex flex-col justify-center">
@@ -149,11 +153,13 @@ export default function BlogPage() {
                 href={`/blog/${post.slug}`}
                 className="group technical-border rounded-xl overflow-hidden bg-[var(--surface)] hover:border-[var(--primary)] transition-all"
               >
-                <div className="aspect-video bg-[var(--surface-container)] overflow-hidden relative">
-                  <img
+                <div className="aspect-video bg-[var(--surface-container)] relative overflow-hidden">
+                  <Image
                     src={post.image}
                     alt={post.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
                 <div className="p-6">

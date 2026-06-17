@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { FloatingPaths } from "@/components/ui/background-paths";
 
 interface SlideData {
@@ -124,7 +125,7 @@ export default function HeroCarousel() {
           willChange: "transform"
         }}
       >
-        {SLIDES.map((slide) => (
+        {SLIDES.map((slide, idx) => (
           <div
             key={slide.id}
             className={`w-full h-full flex-shrink-0 bg-gradient-to-br ${slide.bgGradient} relative flex items-center`}
@@ -167,10 +168,13 @@ export default function HeroCarousel() {
                   onMouseLeave={() => setPaused(false)}
                   className="w-full max-w-[480px] aspect-video rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-[var(--surface-container-low)]/50 relative hover:scale-105 transition-all duration-300"
                 >
-                  <img
+                  <Image
                     src={slide.image}
                     alt={slide.title}
-                    className="w-full h-full object-cover"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 500px"
+                    priority={idx === 0}
+                    className="object-cover"
                   />
                 </div>
               </div>

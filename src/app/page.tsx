@@ -2,11 +2,13 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import HeroCarousel from "@/components/HeroCarousel";
 import PlanFinder from "@/components/PlanFinder";
 import CorporateTeaser from "@/components/CorporateTeaser";
 import { featuresData, trustBarItems } from "@/data/features";
 import NetworkIndicators from "@/components/NetworkIndicators";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export default function HomePage() {
   const [activeRingTab, setActiveRingTab] = useState<1 | 2>(1);
@@ -41,16 +43,31 @@ export default function HomePage() {
       <HeroCarousel />
 
       {/* ─── Trust Bar ─────────────────────────────────── */}
-      <section className="bg-[var(--surface-container)] py-8 border-y border-[var(--border-cyan)]">
-        <div className="max-w-[1280px] mx-auto px-5 md:px-16 flex flex-wrap justify-between items-center gap-8">
-          {trustBarItems.map((item) => (
-            <div key={item} className="flex items-center gap-3">
-              <span className="w-2 h-2 rounded-full bg-[var(--primary)]" />
-              <span className="text-sm font-medium text-[var(--text-primary)]">
-                {item}
-              </span>
-            </div>
-          ))}
+      <section className="bg-[var(--surface-container)] py-6 border-y border-[var(--border-cyan)]">
+        <div className="max-w-[1280px] mx-auto px-5 md:px-16">
+          <div className="flex flex-wrap justify-center md:justify-between items-center gap-4 md:gap-6">
+            {trustBarItems.map((item, i) => (
+              <ScrollReveal key={item.label} variant="up" delay={i * 80} duration={500}>
+                <div
+                  className="flex items-center gap-3 px-5 py-3 rounded-xl bg-[var(--surface)]/60 border border-[var(--border-cyan)] hover:border-[var(--primary)]/40 transition-all duration-300 group cursor-default"
+                >
+                  <div className="w-9 h-9 rounded-lg bg-[var(--primary)]/10 flex items-center justify-center group-hover:bg-[var(--primary)]/20 transition-colors">
+                    <span className="material-symbols-outlined text-[var(--primary)] text-[18px]">
+                      {item.icon}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="font-outfit text-lg font-bold text-[var(--text-primary)] leading-none">
+                      {item.value}
+                    </span>
+                    <p className="text-[10px] font-semibold text-[var(--text-muted)] uppercase tracking-wider leading-none mt-0.5">
+                      {item.label}
+                    </p>
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -64,24 +81,50 @@ export default function HomePage() {
       <CorporateTeaser />
 
       {/* ─── Features Grid ─────────────────────────────── */}
-      <section className="bg-[var(--surface-container-low)] py-24">
+      <section className="bg-[var(--surface-container-low)] py-24 section-glow">
         <div className="max-w-[1280px] mx-auto px-5 md:px-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuresData.map((feature) => (
-              <div
-                key={feature.title}
-                className="p-8 technical-border rounded-xl bg-[var(--surface)] hover:bg-[var(--surface-variant)] transition-colors"
-              >
-                <span className="material-symbols-outlined text-[var(--primary)] text-[40px] mb-6 block">
-                  {feature.icon}
+          {/* Section Header */}
+          <ScrollReveal variant="up">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[var(--primary)]/8 border border-[var(--border-cyan)] rounded-full mb-5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[var(--primary)] animate-pulse" />
+                <span className="text-[var(--primary)] text-[10px] font-bold tracking-[0.1em] uppercase">
+                  Why Choose Neolog
                 </span>
-                <h3 className="font-heading text-2xl font-bold text-[var(--text-primary)] mb-3">
-                  {feature.title}
-                </h3>
-                <p className="text-sm text-[var(--text-muted)]">
-                  {feature.description}
-                </p>
               </div>
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-4 tracking-tight">
+                Enterprise-Grade Features
+              </h2>
+              <p className="text-base text-[var(--text-muted)] max-w-xl mx-auto leading-relaxed">
+                Every connection is built on carrier-grade infrastructure with zero compromises on speed, security, or reliability.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {featuresData.map((feature, i) => (
+              <ScrollReveal key={feature.title} variant="up" delay={i * 100}>
+                <div
+                  className="glass-card gradient-border-card rounded-2xl p-8 relative group h-full"
+                >
+                  {/* Icon in gradient container */}
+                  <div className="icon-container mb-6">
+                    <span className="material-symbols-outlined text-[var(--primary)] text-[26px]">
+                      {feature.icon}
+                    </span>
+                  </div>
+                  
+                  <h3 className="font-heading text-xl font-bold text-[var(--text-primary)] mb-3 tracking-tight">
+                    {feature.title}
+                  </h3>
+                  <p className="text-sm text-[var(--text-muted)] leading-relaxed">
+                    {feature.description}
+                  </p>
+
+                  {/* Decorative corner glow on hover */}
+                  <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-[var(--primary)]/5 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -91,10 +134,12 @@ export default function HomePage() {
       <section className="bg-[var(--surface-container-low)] border-t border-b border-[var(--border-cyan)] py-20 w-full relative overflow-hidden">
         {/* Background Cover Image of Fiber Optics */}
         <div className="absolute inset-0 z-0 opacity-35 select-none pointer-events-none">
-          <img
+          <Image
             src="/images/fiber-optics-bg.png"
             alt=""
-            className="w-full h-full object-cover"
+            fill
+            sizes="100vw"
+            className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[var(--surface-container-low)] via-transparent to-[var(--surface-container-low)]" />
         </div>
@@ -103,15 +148,17 @@ export default function HomePage() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[var(--primary)]/5 blur-[120px] rounded-full pointer-events-none z-0" />
 
         <div className="max-w-[1280px] mx-auto px-5 md:px-16 text-center relative z-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.05em] text-[var(--primary)] mb-1">
-            Now Serving Twin Cities
-          </p>
-          <h2 className="font-heading text-3xl font-bold text-[var(--text-primary)] mb-4">
-            Expanding High-Speed Fiber Coverage
-          </h2>
-          <p className="text-sm text-[var(--text-muted)] max-w-xl mx-auto mb-10 leading-relaxed">
-            Neolog fiber rings are actively providing dedicated gigabit connections to Hyderabad&apos;s key commercial and residential hubs.
-          </p>
+          <ScrollReveal variant="up">
+            <p className="text-xs font-semibold uppercase tracking-[0.05em] text-[var(--primary)] mb-1">
+              Now Serving Twin Cities
+            </p>
+            <h2 className="font-heading text-3xl font-bold text-[var(--text-primary)] mb-4">
+              Expanding High-Speed Fiber Coverage
+            </h2>
+            <p className="text-sm text-[var(--text-muted)] max-w-xl mx-auto mb-10 leading-relaxed">
+              Neolog fiber rings are actively providing dedicated gigabit connections to Hyderabad&apos;s key commercial and residential hubs.
+            </p>
+          </ScrollReveal>
 
           {/* Ring Selector Tabs */}
           <div className="flex justify-center mb-8">
@@ -215,11 +262,13 @@ export default function HomePage() {
 
       {/* ─── College Clients Logo Wall ────────────────────────── */}
       <section className="bg-[var(--surface-container)] py-16 overflow-hidden border-y border-[var(--border-cyan)]">
-        <div className="max-w-[1280px] mx-auto px-5 md:px-16 text-center mb-10">
-          <p className="text-sm font-bold uppercase tracking-widest text-[var(--text-muted)]">
-            Trusted by 15+ Engineering Institutions in Hyderabad
-          </p>
-        </div>
+        <ScrollReveal variant="up">
+          <div className="max-w-[1280px] mx-auto px-5 md:px-16 text-center mb-10">
+            <p className="text-sm font-bold uppercase tracking-widest text-[var(--text-muted)]">
+              Trusted by 15+ Engineering Institutions in Hyderabad
+            </p>
+          </div>
+        </ScrollReveal>
         <div className="relative flex overflow-x-hidden">
           {/* Subtle gradient masks for smooth fade at edges */}
           <div className="pointer-events-none absolute inset-y-0 left-0 w-1/6 bg-gradient-to-r from-[var(--surface-container)] to-transparent z-10"></div>
@@ -268,44 +317,86 @@ export default function HomePage() {
       </section>
 
       {/* ─── About Teaser ──────────────────────────────── */}
-      <section className="max-w-[1280px] mx-auto px-5 md:px-16 py-24 flex flex-col lg:flex-row items-center gap-16">
-        <div className="flex-1 space-y-6">
-          <h2 className="font-heading text-[32px] font-bold text-[var(--text-primary)]">
-            Built for Hyderabad,
-            <br />
-            Owned by Engineers.
-          </h2>
-          <p className="text-lg leading-7 text-[var(--text-muted)]">
-            NeoLog Online Services started in 2021 with a simple mission: to
-            provide the tech-hub of India with the reliable infrastructure it
-            deserves. We don&apos;t just sell internet; we manage the fiber
-            network ourselves.
-          </p>
-          <div className="flex gap-12 border-t border-[var(--border-cyan)] pt-12">
-            <div>
-              <p className="font-outfit text-[48px] font-bold text-[var(--primary)] mb-1">
-                5K+
-              </p>
-              <p className="text-sm font-medium text-[var(--text-muted)] uppercase tracking-wider">
-                Subscribers
-              </p>
-            </div>
-            <div>
-              <p className="font-outfit text-[48px] font-bold text-[var(--primary)] mb-1">
-                99%
-              </p>
-              <p className="text-sm font-medium text-[var(--text-muted)] uppercase tracking-wider">
-                Uptime Rate
-              </p>
-            </div>
-          </div>
+      <section className="relative py-24 overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0 pointer-events-none select-none">
+          <div className="absolute top-20 right-0 w-[500px] h-[500px] bg-[var(--primary)]/3 blur-[150px] rounded-full" />
+          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[var(--secondary)]/3 blur-[120px] rounded-full" />
         </div>
-        <div className="flex-1 w-full aspect-video rounded-3xl overflow-hidden technical-border relative">
-          <img
-            src="/images/engineers-network.png"
-            alt="Neolog Network Engineers at Work"
-            className="w-full h-full object-cover"
-          />
+
+        <div className="max-w-[1280px] mx-auto px-5 md:px-16 flex flex-col lg:flex-row items-center gap-16 relative z-10">
+          <ScrollReveal variant="left" className="flex-1">
+            <div className="space-y-8">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[var(--primary)]/8 border border-[var(--border-cyan)] rounded-full">
+                <span className="w-1.5 h-1.5 rounded-full bg-[var(--primary)] animate-pulse" />
+                <span className="text-[var(--primary)] text-[10px] font-bold tracking-[0.1em] uppercase">
+                  About Neolog
+                </span>
+              </div>
+
+              <h2 className="font-heading text-3xl md:text-4xl lg:text-[42px] font-bold text-[var(--text-primary)] leading-tight tracking-tight">
+                Built for Hyderabad,
+                <br />
+                <span className="stat-gradient">Owned by Engineers.</span>
+              </h2>
+              <p className="text-base md:text-lg leading-relaxed text-[var(--text-muted)] max-w-xl">
+                NeoLog Online Services started in 2021 with a simple mission: to
+                provide the tech-hub of India with the reliable infrastructure it
+                deserves. We don&apos;t just sell internet; we manage the fiber
+                network ourselves.
+              </p>
+              <div className="flex gap-10 border-t border-[var(--border-cyan)] pt-10">
+                <div>
+                  <p className="font-outfit text-[48px] font-bold stat-gradient mb-1 leading-none">
+                    5K+
+                  </p>
+                  <p className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider">
+                    Subscribers
+                  </p>
+                </div>
+                <div>
+                  <p className="font-outfit text-[48px] font-bold stat-gradient mb-1 leading-none">
+                    99%
+                  </p>
+                  <p className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider">
+                    Uptime Rate
+                  </p>
+                </div>
+                <div>
+                  <p className="font-outfit text-[48px] font-bold stat-gradient mb-1 leading-none">
+                    24/7
+                  </p>
+                  <p className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider">
+                    NOC Support
+                  </p>
+                </div>
+              </div>
+              <Link
+                href="/about"
+                className="inline-flex items-center gap-2 text-sm font-bold text-[var(--primary)] hover:gap-3 transition-all group"
+              >
+                Learn more about us
+                <span className="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+              </Link>
+            </div>
+          </ScrollReveal>
+          
+          {/* Image with premium frame */}
+          <ScrollReveal variant="right" delay={200} className="flex-1 w-full">
+            <div className="w-full relative">
+              <div className="absolute -inset-1 bg-gradient-to-br from-[var(--primary)]/20 via-transparent to-[var(--secondary)]/20 rounded-[28px] blur-sm" />
+              <div className="relative aspect-video rounded-3xl overflow-hidden premium-shadow">
+                <Image
+                  src="/images/engineers-network.png"
+                  alt="Neolog Network Engineers at Work"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+              </div>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
     </>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { CardSkeleton } from "@/components/ui/Skeleton";
@@ -111,10 +112,12 @@ export default function CorporatePage() {
             </div>
             <div className="lg:col-span-5">
               <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden technical-border relative">
-                <img
+                <Image
                   src="/images/heroes/corporate.png"
                   alt="Neolog Corporate Enterprise Network"
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
                 />
               </div>
             </div>

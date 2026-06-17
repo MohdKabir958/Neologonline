@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, ReactNode, startTransition } from "react";
 
 type Theme = "dark" | "light";
 
@@ -35,9 +35,12 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   function toggleTheme() {
     const next = theme === "dark" ? "light" : "dark";
-    setTheme(next);
     document.documentElement.setAttribute("data-theme", next);
     localStorage.setItem("neolog-theme", next);
+    
+    startTransition(() => {
+      setTheme(next);
+    });
   }
 
   // Prevent flash of wrong theme

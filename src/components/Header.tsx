@@ -2,7 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, startTransition } from "react";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 import { NAV_LINKS, EXTRA_NAV_LINKS } from "@/lib/constants";
 import { useTheme } from "@/components/ThemeProvider";
 
@@ -17,7 +19,7 @@ export default function Header() {
   useEffect(() => {
     function handleClick(e: MouseEvent) {
       if (moreRef.current && !moreRef.current.contains(e.target as Node)) {
-        setMoreOpen(false);
+        startTransition(() => setMoreOpen(false));
       }
     }
     document.addEventListener("mousedown", handleClick);
@@ -32,9 +34,12 @@ export default function Header() {
       <div className="max-w-[1280px] mx-auto px-5 md:px-16 h-full flex justify-between items-center">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <img
+          <Image
             src="/LOGO-1-removebg-preview.png"
             alt="NeoLog Broadband"
+            width={160}
+            height={64}
+            priority
             className="h-12 md:h-16 w-auto object-contain"
           />
         </Link>
@@ -61,7 +66,7 @@ export default function Header() {
           {/* More Dropdown */}
           <div ref={moreRef} className="relative">
             <button
-              onClick={() => setMoreOpen(!moreOpen)}
+              onClick={() => startTransition(() => setMoreOpen(!moreOpen))}
               className={`flex items-center gap-1 text-sm font-medium tracking-[0.01em] transition-colors ${
                 isExtraActive
                   ? "text-[var(--primary)] font-bold"
@@ -87,7 +92,7 @@ export default function Header() {
                     <Link
                       key={link.href}
                       href={link.href}
-                      onClick={() => setMoreOpen(false)}
+                      onClick={() => startTransition(() => setMoreOpen(false))}
                       className={`flex items-center gap-3 px-4 py-3 text-sm transition-colors ${
                         isActive
                           ? "text-[var(--primary)] bg-[var(--primary)]/5 font-bold"
@@ -172,7 +177,7 @@ export default function Header() {
             </span>
           </button>
           <button
-            onClick={() => setMobileOpen(!mobileOpen)}
+            onClick={() => startTransition(() => setMobileOpen(!mobileOpen))}
             className="text-[var(--text-primary)] p-2"
             aria-label="Toggle menu"
           >
@@ -184,9 +189,17 @@ export default function Header() {
       </div>
 
       {/* Mobile Menu */}
-      {mobileOpen && (
-        <div className="md:hidden bg-[var(--surface)] border-t border-[var(--border-cyan)] absolute top-20 left-0 right-0 z-50 max-h-[calc(100vh-80px)] overflow-y-auto">
-          <div className="px-5 py-6 space-y-1">
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="md:hidden bg-[var(--surface)] border-t border-[var(--border-cyan)] absolute top-20 left-0 right-0 z-50 overflow-hidden shadow-2xl"
+          >
+            <div className="max-h-[calc(100vh-80px)] overflow-y-auto">
+              <div className="px-5 py-6 space-y-1">
             {/* Main Links */}
             {NAV_LINKS.map((link) => {
               const isActive = pathname === link.href;
@@ -194,7 +207,7 @@ export default function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  onClick={() => setMobileOpen(false)}
+                  onClick={() => startTransition(() => setMobileOpen(false))}
                   className={`block text-base font-medium py-3 px-3 rounded-lg ${
                     isActive
                       ? "text-[var(--primary)] bg-[var(--primary)]/5"
@@ -219,7 +232,7 @@ export default function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  onClick={() => setMobileOpen(false)}
+                  onClick={() => startTransition(() => setMobileOpen(false))}
                   className={`flex items-center gap-3 text-base font-medium py-3 px-3 rounded-lg ${
                     isActive
                       ? "text-[var(--primary)] bg-[var(--primary)]/5"
@@ -252,22 +265,24 @@ export default function Header() {
             <div className="pt-2 flex flex-col gap-3">
               <Link
                 href="/sign-in"
-                onClick={() => setMobileOpen(false)}
+                onClick={() => startTransition(() => setMobileOpen(false))}
                 className="text-center text-[var(--primary)] border border-[var(--border-cyan)] px-4 py-3 rounded-lg text-sm font-medium"
               >
                 Login
               </Link>
               <Link
                 href="/dashboard"
-                onClick={() => setMobileOpen(false)}
+                onClick={() => startTransition(() => setMobileOpen(false))}
                 className="text-center bg-[var(--secondary)] text-[var(--on-secondary)] px-6 py-3 rounded-lg text-sm font-bold"
               >
                 My Account
               </Link>
+              </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       )}
+    </AnimatePresence>
     </nav>
   );
 }

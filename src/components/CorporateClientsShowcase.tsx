@@ -1,5 +1,6 @@
 import React from "react";
 import SectionHeader from "@/components/ui/SectionHeader";
+import Image from "next/image";
 
 export default function CorporateClientsShowcase() {
   return (
@@ -17,8 +18,8 @@ export default function CorporateClientsShowcase() {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-[var(--surface)] rounded-2xl technical-border relative overflow-hidden group flex flex-col">
-              <div className="h-48 w-full overflow-hidden border-b border-[var(--border-cyan)]/30">
-                <img src="/images/landmarks/stadium.png" alt="Rajiv Gandhi Stadium" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="h-48 w-full relative overflow-hidden border-b border-[var(--border-cyan)]/30">
+                <Image src="/images/landmarks/stadium.png" alt="Rajiv Gandhi Stadium" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover group-hover:scale-110 transition-transform duration-500" />
               </div>
               <div className="p-6 md:p-8 flex-1 relative">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--primary)]/10 blur-3xl rounded-full group-hover:bg-[var(--primary)]/20 transition-all"></div>
@@ -36,8 +37,8 @@ export default function CorporateClientsShowcase() {
             </div>
 
             <div className="bg-[var(--surface)] rounded-2xl technical-border relative overflow-hidden group flex flex-col">
-              <div className="h-48 w-full overflow-hidden border-b border-[var(--border-cyan)]/30">
-                <img src="/images/landmarks/temple.png" alt="Yadagirigutta Devasthanam" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="h-48 w-full relative overflow-hidden border-b border-[var(--border-cyan)]/30">
+                <Image src="/images/landmarks/temple.png" alt="Yadagirigutta Devasthanam" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover group-hover:scale-110 transition-transform duration-500" />
               </div>
               <div className="p-6 md:p-8 flex-1 relative">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--secondary)]/10 blur-3xl rounded-full group-hover:bg-[var(--secondary)]/20 transition-all"></div>
@@ -55,8 +56,8 @@ export default function CorporateClientsShowcase() {
             </div>
 
             <div className="bg-[var(--surface)] rounded-2xl technical-border relative overflow-hidden group flex flex-col">
-              <div className="h-48 w-full overflow-hidden border-b border-[var(--border-cyan)]/30">
-                <img src="/images/landmarks/tv_studio.png" alt="Metro TV Channel" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="h-48 w-full relative overflow-hidden border-b border-[var(--border-cyan)]/30">
+                <Image src="/images/landmarks/tv_studio.png" alt="Metro TV Channel" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover group-hover:scale-110 transition-transform duration-500" />
               </div>
               <div className="p-6 md:p-8 flex-1 relative">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--primary)]/10 blur-3xl rounded-full group-hover:bg-[var(--primary)]/20 transition-all"></div>
@@ -79,3 +80,6 @@ export default function CorporateClientsShowcase() {
     </section>
   );
 }
+
+
+

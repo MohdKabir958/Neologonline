@@ -38,10 +38,10 @@ export const featuresData = [
 ];
 
 export const trustBarItems = [
-  "100+ Active Circuits",
-  "15+ Institutions",
-  "3 Landmark Clients",
-  "5 Coverage Zones",
+  { icon: "hub", value: "100+", label: "Active Circuits" },
+  { icon: "school", value: "15+", label: "Institutions" },
+  { icon: "apartment", value: "3", label: "Landmark Clients" },
+  { icon: "location_on", value: "5", label: "Coverage Zones" },
 ];
 
 export const whyNeologBenefits = [

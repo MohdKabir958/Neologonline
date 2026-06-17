@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { blogPosts } from "@/data/blog-posts";
@@ -88,12 +89,14 @@ export default async function BlogDetailPage({ params }: Props) {
             </div>
           </div>
 
-          {/* Hero Image */}
           <div className="w-full aspect-video technical-border rounded-xl overflow-hidden relative mb-10">
-            <img
+            <Image
               src={post.image}
               alt={post.title}
-              className="w-full h-full object-cover"
+              fill
+              sizes="(max-width: 1024px) 100vw, 800px"
+              priority
+              className="object-cover"
             />
           </div>
 

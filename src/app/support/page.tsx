@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import SectionHeader from "@/components/ui/SectionHeader";
 import Accordion from "@/components/ui/Accordion";
@@ -87,10 +88,13 @@ export default function SupportPage() {
       <section className="relative bg-[var(--surface)] border-b border-[var(--border-cyan)] overflow-hidden">
         {/* Background Image & Overlay */}
         <div className="absolute inset-0 z-0 select-none pointer-events-none">
-          <img
+          <Image
             src="/images/support_noc_hero.png"
             alt="Neolog Network Operations Center"
-            className="w-full h-full object-cover"
+            fill
+            sizes="100vw"
+            priority
+            className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[var(--surface)]/90 via-[var(--surface)]/70 to-[var(--surface)]" />
         </div>

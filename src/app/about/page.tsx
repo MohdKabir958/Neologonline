@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import SectionHeader from "@/components/ui/SectionHeader";
 import NetworkIndicators from "@/components/NetworkIndicators";
 import ArchitectureStack from "@/components/ArchitectureStack";
@@ -63,10 +64,12 @@ export default function AboutPage() {
             </div>
             <div className="lg:col-span-5">
               <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden technical-border relative shadow-2xl">
-                <img
+                <Image
                   src="/images/heroes/about.png"
                   alt="Neolog Network Infrastructure"
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
                 />
               </div>
             </div>
@@ -331,10 +334,12 @@ export default function AboutPage() {
       {/* Differentiators: Why Neolog vs Large ISPs */}
       <section className="bg-[var(--surface)] py-16 border-y border-[var(--border-cyan)] relative overflow-hidden w-full">
         <div className="absolute inset-0 z-0 opacity-60 select-none pointer-events-none">
-          <img
+          <Image
             src="/images/neolog_edge_bg.png"
             alt=""
-            className="w-full h-full object-cover"
+            fill
+            sizes="100vw"
+            className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[var(--surface)] via-[var(--surface)]/70 to-[var(--surface)]" />
         </div>

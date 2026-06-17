@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, startTransition } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import ScrollReveal from "@/components/ScrollReveal";
 
 interface RecommendedPlan {
   id: string;
@@ -59,15 +60,15 @@ export default function PlanFinder() {
   const [selectedUsages, setSelectedUsages] = useState<string[]>(["General Browsing"]);
 
   const handleUsageToggle = (usage: string) => {
-    setSelectedUsages((prev) => {
-      // Toggle logic
-      if (prev.includes(usage)) {
-        // Don't allow empty selection to keep recommendation active
-        if (prev.length === 1) return prev;
-        return prev.filter((u) => u !== usage);
-      } else {
-        return [...prev, usage];
-      }
+    startTransition(() => {
+      setSelectedUsages((prev) => {
+        if (prev.includes(usage)) {
+          if (prev.length === 1) return prev;
+          return prev.filter((u) => u !== usage);
+        } else {
+          return [...prev, usage];
+        }
+      });
     });
   };
 
@@ -80,11 +81,13 @@ export default function PlanFinder() {
 
       <div className="max-w-[1200px] mx-auto px-5 relative z-10">
         {/* Headline */}
-        <div className="text-center mb-8 md:mb-10">
-          <h2 className="font-heading text-2xl md:text-3xl font-bold text-[var(--text-primary)] tracking-tight">
-            Find the best Wi-Fi plan for you
-          </h2>
-        </div>
+        <ScrollReveal variant="up">
+          <div className="text-center mb-8 md:mb-10">
+            <h2 className="font-heading text-2xl md:text-3xl font-bold text-[var(--text-primary)] tracking-tight">
+              Find the best Wi-Fi plan for you
+            </h2>
+          </div>
+        </ScrollReveal>
 
         {/* 3 Cards Grid Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 items-stretch max-w-[1080px] mx-auto">
@@ -108,7 +111,7 @@ export default function PlanFinder() {
                   return (
                     <button
                       key={option}
-                      onClick={() => setSelectedDevices(option)}
+                      onClick={() => startTransition(() => setSelectedDevices(option))}
                       className={`w-full py-3 px-4 rounded-xl text-center text-xs font-semibold transition-all duration-200 border ${
                         isSelected
                           ? "bg-[var(--primary)] text-[var(--on-primary)] border-[var(--primary)] shadow-md font-bold"

@@ -285,3 +285,190 @@ body {
 .animate-marquee:hover {
   animation-play-state: paused;
 }
+
+/* ─── Premium Glass Card ──────────────────────────────── */
+
+.glass-card {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.03) 0%,
+    rgba(255, 255, 255, 0.01) 100%
+  );
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(99, 222, 255, 0.12);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(99, 222, 255, 0.35);
+  box-shadow:
+    0 0 30px rgba(99, 222, 255, 0.08),
+    0 20px 60px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+}
+
+[data-theme="light"] .glass-card {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(240, 243, 248, 0.6) 100%
+  );
+  border: 1px solid rgba(8, 145, 178, 0.1);
+}
+
+[data-theme="light"] .glass-card:hover {
+  border-color: rgba(8, 145, 178, 0.3);
+  box-shadow:
+    0 0 30px rgba(8, 145, 178, 0.06),
+    0 20px 60px rgba(0, 0, 0, 0.06);
+}
+
+/* ─── Gradient Border Card ─────────────────────────────── */
+
+.gradient-border-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+.gradient-border-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary));
+  background-size: 200% 100%;
+  animation: shimmer-border 3s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes shimmer-border {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ─── Glow Card (colored shadow on hover) ──────────────── */
+
+.glow-card-cyan {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glow-card-cyan:hover {
+  box-shadow:
+    0 4px 20px rgba(99, 222, 255, 0.15),
+    0 0 40px rgba(99, 222, 255, 0.05);
+}
+
+.glow-card-gold:hover {
+  box-shadow:
+    0 4px 20px rgba(255, 185, 90, 0.15),
+    0 0 40px rgba(255, 185, 90, 0.05);
+}
+
+/* ─── Gradient Text for Stats ──────────────────────────── */
+
+.stat-gradient {
+  background: linear-gradient(135deg, var(--primary) 0%, #ffffff 80%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme="light"] .stat-gradient {
+  background: linear-gradient(135deg, var(--primary) 0%, #0e4f5c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Premium Layered Shadow ───────────────────────────── */
+
+.premium-shadow {
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.08),
+    0 4px 12px rgba(0, 0, 0, 0.12),
+    0 16px 40px rgba(0, 0, 0, 0.16);
+}
+
+[data-theme="light"] .premium-shadow {
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 4px 12px rgba(0, 0, 0, 0.06),
+    0 16px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* ─── Icon Container (gradient background circle) ──────── */
+
+.icon-container {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(99, 222, 255, 0.15) 0%, rgba(99, 222, 255, 0.05) 100%);
+  border: 1px solid rgba(99, 222, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover .icon-container {
+  background: linear-gradient(135deg, rgba(99, 222, 255, 0.25) 0%, rgba(99, 222, 255, 0.1) 100%);
+  transform: scale(1.1);
+}
+
+[data-theme="light"] .icon-container {
+  background: linear-gradient(135deg, rgba(8, 145, 178, 0.1) 0%, rgba(8, 145, 178, 0.03) 100%);
+  border: 1px solid rgba(8, 145, 178, 0.15);
+}
+
+/* ─── Scroll Reveal Animations ─────────────────────────── */
+
+@keyframes slide-up-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.reveal-up {
+  animation: slide-up-reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.reveal-scale {
+  animation: fade-scale-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ─── Section Divider Glow ─────────────────────────────── */
+
+.section-glow {
+  position: relative;
+}
+
+.section-glow::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, startTransition } from "react";
 import SectionHeader from "@/components/ui/SectionHeader";
 import Accordion from "@/components/ui/Accordion";
 import ErrorState from "@/components/ui/ErrorState";
@@ -177,7 +177,7 @@ export default function PlansPage() {
             {(["6M", "12M", "18M"] as const).map((term) => (
               <button
                 key={term}
-                onClick={() => setBilling(term)}
+                onClick={() => startTransition(() => setBilling(term))}
                 className={`px-5 py-2 rounded-xl text-sm font-bold transition-all cursor-pointer ${
                   billing === term
                     ? "bg-[var(--secondary)] text-[var(--on-secondary)] shadow-md"

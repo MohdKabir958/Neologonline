@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { submitContactForm } from "@/lib/api";
 import { COMPANY } from "@/lib/constants";
@@ -85,10 +86,12 @@ export default function ContactPage() {
 
           <div className="lg:col-span-5">
             <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden technical-border relative">
-              <img
+              <Image
                 src="/images/heroes/contact.png"
                 alt="Neolog Priority NOC Support Helpdesk"
-                className="w-full h-full object-cover"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
               />
             </div>
           </div>
